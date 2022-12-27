@@ -1,0 +1,25 @@
+services:
+  napa:
+    container_name: frnt
+    image: phpmyadmin
+    ports:
+      - 80:80
+    restart: always
+    environment:
+      PMA_HOST: mysql
+      PMA_USER: saad
+      PMA_PASSWORD: 123
+    depends_on:
+      - mysql
+
+  mysql:
+    container_name: bckend
+    image: mysql
+    restart: always
+    volumes:
+      - ./database:/docker-entrypoint-initdb.d/
+    environment:
+      MYSQL_DATABASE: saad
+      MYSQL_ROOT_PASSWORD: 123
+    ports:
+      - 3306:3306
